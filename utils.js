@@ -5,7 +5,7 @@
  */
 exports.split = text => {
   const regSplit = (str, returnArr) => {
-    let rex = /[A-Za-z0-9_][A-Za-z0-9_]*|\+|-|\*|\/|<|>|:=|=|;|\(|\)|\{|\}|\$|~|`|!|@|#|%|\^|&|,|\?|\|/
+    let rex = /[A-Za-z0-9_][A-Za-z0-9_]*|\+|-|\*|\/|<|>|:=|=|;|\(|\)|\{|\}|\$|~|`|!|@|#|%|\^|&|,|\?|\||\s+/
     let result = str.match(rex)
     if(result) {
       returnArr.push(result[0])
@@ -14,7 +14,13 @@ exports.split = text => {
       str = str.substring(result[0].length)
       return regSplit(str, returnArr)
     } else {
-      return returnArr
+      let _returnArr = []
+      returnArr.forEach(item => {
+        if(item !== ' ') {
+          _returnArr.push(item)
+        }
+      })
+      return _returnArr
     }
   }
   return regSplit(text, [])
@@ -37,4 +43,22 @@ exports.readCode = path => {
  */
 exports.writeCode = (path, result) => {
   console.log('输出文件')
+}
+
+/**
+ * 判断是否符合数字
+ * @param {String} token - 判断的字符串
+ * @return {Boolean}
+ */
+exports.isNumber = token => {
+  return /[0-9]/.test(token)
+}
+
+/**
+ * 判断是否是标识符
+ * @param {String} token - 判断的字符串
+ * @return {Boolean}
+ */
+exports.isIdentifier = token => {
+  return /^[a-z]|^[A-z]|^\_/.test(token)
 }
