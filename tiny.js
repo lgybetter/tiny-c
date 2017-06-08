@@ -128,11 +128,7 @@ class Tiny {
   }
 
   __comparisonOp () {
-    if (this.token === '<' || this.token === '=') {
-      this.__match()
-    } else {
-      throw new Error('wrong')
-    }    
+    this.__match()
   }
 
 
