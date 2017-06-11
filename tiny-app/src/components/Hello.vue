@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     start () {
-      this.$http.post('http://localhost:3000/tiny', {
+      this.$http.post('http://localhost:3001/tiny', {
         code: this.code
       }).then(res => {
         this.result = res.body
